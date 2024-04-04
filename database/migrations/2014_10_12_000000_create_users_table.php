@@ -16,10 +16,11 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->bigInteger('phone_number');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('Country');
             $table->enum('gender',['زن','مرد']);
             $table->string('Address');
+            $table->string('password');
             $table->timestamps();
         });
     }

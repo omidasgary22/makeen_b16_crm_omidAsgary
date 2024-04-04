@@ -51,6 +51,11 @@
     <input style="padding: 10px; width: 1200px; margin: 5px;" type="text"  name="Address"
         placeholder="لطفا ادرس خود را وارد کنید"><br>
 
+        <label style="font-size: larger; margin: 10px;" for="Adderss">
+            رمز عبور:</label><br>
+        <input style="padding: 10px; width: 1200px; margin: 5px;" type="text"  name="password"
+            placeholder="لطفا رمز خود را وارد کنید"><br>
+
         <input type="submit" value="send">
     </form>
 </body>

@@ -64,6 +64,7 @@ Route::post('/users/edite/{id}', function (Request $request, $id) {
         "Country" => $request->Country,
         "gender" => $request->gender,
         "Address" => $request->Address,
+        "password" => $request->password,
     ]);
     return Redirect('/users/index');
 });
@@ -95,7 +96,7 @@ Route::get('/products/index', function(){
 
     $products = DB::table('products')->get();
 
-    return view('products.index',["products"=> $products]);
+    //return view('products.index',["products"=> $products]);
 });
 
 //route post products

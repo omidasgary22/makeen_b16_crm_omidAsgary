@@ -117,6 +117,13 @@
         ادرس:</label><br>
     <input style="padding: 10px; width: 1200px; margin: 5px;" type="text"  name="Address"
         placeholder="لطفا ادرس خود را وارد کنید" value="{{$user->Address}}"><br>
+        <br>
+
+    <label style="font-size: larger; margin: 10px;" for="passwoed">
+        رمز عبور:</label><br>
+    <input style="padding: 10px; width: 1200px; margin: 5px;" type="text"  name="password"
+        placeholder="لطفا رمز عبور خود را وارد کنید" value="{{$user->password}}"><br>
+
 
         <input type="submit" value="send">
     </form>

@@ -86,6 +86,7 @@
         <th>موبایل</th>
         <th>کشور</th>
         <th>ادرس</th>
+        <th>password</th>
         <th>جنسیت</th>
         <th>manage</th>
         <br>
@@ -102,6 +103,7 @@
         <td>{{$users->phone_number}}</td>
         <td>{{$users->Country}}</td>
         <td>{{$users->Address}}</td>
+        <td>{{$users->password}}</td>
         <td>{{$users->gender}}</td>
         <td>
            <a href="/users/edite/{{$users->id}}"><button>ویرایش</button></a>
