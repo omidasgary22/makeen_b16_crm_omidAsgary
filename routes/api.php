@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
+//salam man delam mikhad be to begam chera sal mkhobi  dishab to baqe ferdos dava bode sare 
 Route::post('login', [UserController::class,'login'])->name('login ');
 
 
