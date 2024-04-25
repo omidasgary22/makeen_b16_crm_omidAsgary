@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\order;
+use App\Models\product;
 use Illuminate\Database\Eloquent\HigherOrderBuilderProxy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +13,7 @@ class ProductController extends Controller
     public function index($id = null)
     {
         if ($id) {
-            $products = DB::table('products')->where('id', $id)->first();
+            $products = product::where('id', $id)->first();
         } else {
             $products = DB::table('products')
             ->orderBy('id', 'desc')

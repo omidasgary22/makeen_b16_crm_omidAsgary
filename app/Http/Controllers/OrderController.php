@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -9,32 +10,33 @@ class OrderController extends Controller
 {
     public function index($id = null)
     {
+        // dd();
         if ($id) {
-            $orders = DB::table('oeders')->where('id', $id)->first();
+            $orders =Order::with(['user', 'products'])->find($id);
         } else {
-            $orders = DB::table('orders')
-            ->orderBy('id', 'desc')
-            ->paginate(1);
+            $orders = Order::with(['user', 'products'])->orderBy('id', 'desc')
+            ->paginate(5);
         }
-        $orders = DB::table('orders')->get();
-        return response()->json(["orders" => $orders]);
+
+        return response()->json($orders);
     }
 
     public function store(request $request)
     {
-        $orders = DB::table('orders')->insert($request->toArray());
+        $orders = Order::create($request->toArray());
+        $orders->products()->attach($request->product_ids);
         return response()->json($orders);
     }
 
     public function edit(Request $request, string $id)
     {
-        $order = DB::table('orders')->where('id', $id)->update($request->toArray());
+        $order = order::where('id', $id)->update($request->toArray());
         return response()->json($order);
     }
 
     public function delete($id)
     {
-        $order = DB::table('orders')->where('id', $id)->delete();
+        $order = order::destroy($id);
         return response()->json($order);
     }
 }

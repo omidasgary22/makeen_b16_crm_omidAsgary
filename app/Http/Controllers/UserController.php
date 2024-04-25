@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Database\Seeders\usersTablesSeeder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -30,13 +31,13 @@ return response()->json(["Token" => $token]);
      */
     public function index()
     {
-        $users = DB::table('users')->get();
+        $users = User::with('orders')->get();
         return response()->json($users);
     }
 
     public function single(string $id)
     {
-        $user = DB::table('users')->where('id', $id)->first();
+        $user = User::find($id);
         return response()->json($user);
     }
 
@@ -50,16 +51,22 @@ return response()->json(["Token" => $token]);
 
     public function delete(string $id)
     {
-        $user = User::where('id', $id)->delete();
+        $user = User::destroy($id);
         return response()->json($user);
     }
 
     public function edit(Request $request, string $id)
     {
-        $user = DB::table('users')->where('id', $id)->update($request->merge([
+        $user = User::where('id', $id)->update($request->merge([
             "password" => Hash::make($request->password)
         ])->toArray());
         return response()->json($user);
+    }
+
+    public function users()
+    {
+        $user = user::find(3);
+        $orders = $user->orders;
     }
 
 }

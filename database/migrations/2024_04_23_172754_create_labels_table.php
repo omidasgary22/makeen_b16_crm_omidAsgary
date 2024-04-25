@@ -1,6 +1,5 @@
- <?php
+<?php
 
-use Faker\Guesser\Name;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,16 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('labels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('phone_number');
-            $table->string('Address');
-            $table->string('products');
-            $table->string('number');
-            $table->bigInteger('price');
-            $table->text('description');
-            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }
@@ -31,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('labels');
     }
 };
