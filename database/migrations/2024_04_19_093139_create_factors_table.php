@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('factor', function (Blueprint $table) {
+        Schema::create('factors', function (Blueprint $table) {
             $table->id();
+            //$table->foreignId('user_id')->constrained()->restrictOnDelete()->restrictOnUpdate();
             $table->integer('Product_Code');
-            $table->string('Description of goods');
+            $table->string('Description_of_goods');
             $table->string('Amount');
+           $table->unsignedBigInteger('user_id');
+           $table->unsignedBigInteger('order_id');
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('_factor');
+        Schema::dropIfExists('factors');
     }
 };

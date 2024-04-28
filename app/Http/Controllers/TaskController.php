@@ -10,19 +10,18 @@ class TaskController extends Controller
     public function index($id = null)
     {
         if ($id) {
-           $Task = Task::where('id', $id)->first();
+           $Task = Task::with(['user','team'])->find($id);
         } else {
-            $Task = Task::
-            orderBy('id', 'desc')
+            $Task = Task::with(['user','team'])->orderBy('id','desc')
             ->paginate(1);
         }
-        $Task = Task::get();
-        return response()->json(["task"=> $Task]);
+       // $Task = Task::get();
+        return response()->json($Task);
     }
 
      public function store(Request $request)
 {
-    $Task = Task::insert($request->toArray());
+    $Task = Task::create($request->toArray());
     return response()->json($Task);
 }
 
@@ -38,5 +37,5 @@ class TaskController extends Controller
     $Task = Task::destroy($id);
     return response()->json($Task);
  }
- 
+
 }

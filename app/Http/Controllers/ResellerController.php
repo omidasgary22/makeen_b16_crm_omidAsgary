@@ -23,7 +23,7 @@ class ResellerController extends Controller
 
     public function store(Request $request)
     {
-        $Resellers = DB::table('Resellers')->insert($request->toArray());
+        $Resellers = DB::table('Resellers')->create($request->toArray());
         return response()->json($Resellers);
     }
 

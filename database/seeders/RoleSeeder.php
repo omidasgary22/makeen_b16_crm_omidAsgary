@@ -14,10 +14,44 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = Role::create(['name'=>'admin']);
 
-        $user_create = Permission::create(['name' => 'user.create']);
 
-        $admin->givePermissionTo($user_create);
+
+        // User Permissions
+        Permission::create(['name' => 'create-users']);
+        Permission::create(['name' => 'update-users']);
+        Permission::create(['name' => 'delete-users']);
+        Permission::create(['name' => 'index-users']);
+
+        // product Permissions
+        Permission::create(['name' => 'create-roles']);
+        Permission::create(['name' => 'update-roles']);
+        Permission::create(['name' => 'delete-roles']);
+        Permission::create(['name' => 'index.roles']);
+
+        // Roles
+
+        $admin = Role::create(['name' => 'admin']);
+        $admin->givePermissionTo([
+            'create-users',
+            'update-users',
+            'delete-users',
+            'index-users'
+        ]);
+
+        $super_admin = Role::create(['name' => 'super_admin']);
+        $super_admin->givePermissionTo([
+            'create-users',
+            'update-users',
+            'delete-users',
+            'index-users',
+            'create-roles',
+            'update-roles',
+            'delete-roles',
+            'index-roles',
+        ]);
+
+        $user = Role::create(['name' => 'user']);
+        $reseller = Role::create(['name' => 'reseller']);
     }
 }

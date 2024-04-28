@@ -16,13 +16,13 @@ class LabelController extends Controller
             orderBy('id', 'desc')
             ->paginate(1);
         }
-        $Label = Label::get();
+        //$Label = Label::get();
         return response()->json(["Label"=> $Label]);
     }
 
      public function store(Request $request)
 {
-    $Label = Label::insert($request->toArray());
+    $Label = Label::create($request->toArray());
     return response()->json($Label);
 }
 

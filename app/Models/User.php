@@ -5,7 +5,9 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -29,6 +31,7 @@ class User extends Authenticatable
         'gender',
         'Address',
         'password',
+        'team_id',
     ];
 
     /**
@@ -59,5 +62,30 @@ class User extends Authenticatable
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
+
+    public function factors():HasMany
+    {
+        return $this->hasMany(factor::class);
+    }
+
+    public function notes():HasMany
+    {
+        return $this->hasMany(note::class);
+    }
+
+    public function tikets():HasOne
+    {
+        return $this->hasOne(tiket::class);
+    }
+
+    public function team():BelongsTo
+    {
+        return $this->belongsTo(team::class);
     }
 }

@@ -10,17 +10,17 @@ class MessageController extends Controller
     public function index($id = null)
     {
         if ($id) {
-            $Message = Message::where('id',$id)->first();
+            $Message = Message::with('tiket')->find($id);
         } else{
-            $Message = Message::orderBy('id', 'desc')
-            ->paginate(1);
+            $Message = Message::with('tiket')->orderBy('id', 'desc')
+            ->paginate(10);
         }
-        $Message = Message::get();
+       // $Message = Message::get();
         return response()->json(["message"=>$Message]);
     }
     public function store(Request $request)
     {
-        $Message = Message::insert($request->toArray());
+        $Message = Message::create($request->toArray());
         return response()->json($Message);
     }
     public function edit(Request $request,string $id)

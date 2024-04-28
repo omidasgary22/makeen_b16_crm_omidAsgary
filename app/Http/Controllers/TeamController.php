@@ -10,19 +10,18 @@ class TeamController extends Controller
     public function index($id = null)
     {
         if ($id) {
-           $Team = Team::where('id', $id)->first();
+           $Team = Team::with(['user','task'])->find($id);
         } else {
-            $Teams = Team::
-            orderBy('id', 'desc')
-            ->paginate(1);
+            $Team = Team::with(['user','task'])->orderBy('id', 'desc')
+            ->paginate(10);
         }
-        $Team = Team::get();
+        //$Team = Team::get();
         return response()->json(["team"=> $Team]);
     }
 
      public function store(Request $request)
 {
-    $Team = Team::insert($request->toArray());
+    $Team = Team::create($request->toArray());
     return response()->json($Team);
 }
 

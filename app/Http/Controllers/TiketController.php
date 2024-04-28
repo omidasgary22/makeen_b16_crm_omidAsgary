@@ -9,19 +9,19 @@ class TiketController extends Controller
 {
     public function index($id = null)
     {
+        //$tiket=Tiket::with('message')->get()->toArray();
         if ($id) {
-            $Tiket = Tiket::where('id',$id)->first();
+            $Tiket = Tiket::with('message')->find($id);
         } else {
-            $Tiket = Tiket::
-            orderBy('id', 'desc')
-            ->paginate(1);
+            $Tiket = Tiket::with('message')->orderBy('id', 'desc')
+            ->paginate(10);
         }
-        $Tiket = Tiket::get();
-        return response()->json(["tiket"=>$Tiket]);
+       // $Tiket = Tiket::get();
+        return response()->json(["tiket"=>$Tiket]); 
     }
     public function Store(Request $request)
     {
-        $Tiket = Tiket::insert($request->toArray());
+        $Tiket = Tiket::create($request->toArray());
         return response()->json($Tiket);
     }
     public function edit(Request $request,string $id)

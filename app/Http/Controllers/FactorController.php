@@ -11,31 +11,30 @@ class FactorController extends Controller
     public function index($id = null)
     {
         if ($id) {
-            $Factors = Factor::where('id', $id)->first();
+            $Factors = Factor::with(['user','order'])->find($id);
         } else {
-            $Factors = DB::table('Factor')
-                ->orderBy('id', 'desc')
+            $Factors = Factor::with(['user','order'])->orderBy('id', 'desc')
                 ->paginate(1);
         }
-        $Factor = DB::table('Factor')->get();
-        return response()->json(["factor" => $Factor]);
+        //$Factors = Factor::get();
+        return response()->json(["factors" => $Factors]);
     }
 
     public function store(Request $request)
     {
-        $Factors = DB::table('Factors')->insert($request->toArray());
+        $Factors = Factor::create($request->toArray());
         return response()->json($Factors);
     }
 
     public function edit(Request $request, string $id)
     {
-        $Factor =Factor::where('id', $id)->update($request->toArray());
-        return response()->json($Factor);
+        $Factors =Factor::where('id', $id)->update($request->toArray());
+        return response()->json($Factors);
     }
 
     public function delete(string $id)
     {
-        $Factor =Factor::destroy($id);
-        return response()->json($Factor);
+        $Factors =Factor::destroy($id);
+        return response()->json($Factors);
     }
 }

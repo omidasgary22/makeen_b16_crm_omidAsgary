@@ -31,8 +31,8 @@ return response()->json(["Token" => $token]);
      */
     public function index()
     {
-        $users = User::with('orders')->get();
-        return response()->json($users);
+        $users = User::with(['orders','tasks','factors','notes','tikets','team'])->get();
+        return response()->json($users,);
     }
 
     public function single(string $id)

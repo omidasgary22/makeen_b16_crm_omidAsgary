@@ -22,7 +22,7 @@ class WarrentyController extends Controller
 
      public function store(Request $request)
 {
-    $Warrenty = warrenty::insert($request->toArray());
+    $Warrenty = warrenty::create($request->toArray());
     return response()->json($Warrenty);
 }
 

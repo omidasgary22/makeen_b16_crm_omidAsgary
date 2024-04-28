@@ -25,7 +25,7 @@ class ProductController extends Controller
 
     public function store(request $request)
     {
-        $products = DB::table('products')->insert($request->toArray());
+        $products = DB::table('products')->create($request->toArray());
         return response()->json($products);
     }
 

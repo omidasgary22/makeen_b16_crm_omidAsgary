@@ -10,10 +10,9 @@ class NoteController extends Controller
     public function index($id = null)
     {
         if ($id) {
-           $Note = Note::where('id', $id)->first();
+           $Note = Note::with('user')->find($id);
         } else {
-            $Note = Note::
-            orderBy('id', 'desc')
+            $Note = Note::with('user')->orderBy('id', 'desc')
             ->paginate(1);
         }
         $Note = Note::get();
@@ -22,7 +21,7 @@ class NoteController extends Controller
 
      public function store(Request $request)
 {
-    $Note = Note::insert($request->toArray());
+    $Note = Note::create($request->toArray());
     return response()->json($Note);
 }
 
@@ -37,5 +36,5 @@ class NoteController extends Controller
     $Note = Note::destroy($id);
     return response()->json($Note);
  }
- 
+
 }

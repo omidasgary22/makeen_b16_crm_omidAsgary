@@ -12,10 +12,10 @@ class OrderController extends Controller
     {
         // dd();
         if ($id) {
-            $orders =Order::with(['user', 'products'])->find($id);
+            $orders = Order::with(['user', 'products', 'factors'])->find($id);
         } else {
-            $orders = Order::with(['user', 'products'])->orderBy('id', 'desc')
-            ->paginate(5);
+            $orders = Order::with(['user', 'products', 'factors'])->orderBy('id', 'desc')
+                ->paginate(5);
         }
 
         return response()->json($orders);

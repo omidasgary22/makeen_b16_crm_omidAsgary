@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            // $table->foreignId('user_id')->constrained()->restrictOnDelete()->restrictOnUpdate();
             $table->string('first_name');
             $table->string('last_name');
             $table->bigInteger('phone_number');
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->enum('gender',['زن','مرد']);
             $table->string('Address');
             $table->string('password');
+            $table->unsignedBigInteger('team_id');
             $table->timestamps();
         });
     }
