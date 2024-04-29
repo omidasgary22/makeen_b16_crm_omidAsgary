@@ -13,19 +13,19 @@ class ProductController extends Controller
     public function index($id = null)
     {
         if ($id) {
-            $products = product::where('id', $id)->first();
+            $products = product::with('warrenties')->find($id);
         } else {
-            $products = DB::table('products')
-            ->orderBy('id', 'desc')
+            $products = Product::with('warrenties')->orderBy('id', 'desc')
             ->paginate(1);
         }
-        $products = DB::table('products')->get();
+        //$products = DB::table('products')->get();
         return response()->json(["products" => $products]);
     }
 
     public function store(request $request)
     {
-        $products = DB::table('products')->create($request->toArray());
+        $products = Product::create($request->toArray());
+        $products->warrenties()->attach($request->warrenty_ids);
         return response()->json($products);
     }
 

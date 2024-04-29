@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -27,10 +28,14 @@ class Product extends Model
 
     ];
 
-public function orders(){
+    public function orders()
+    {
 
-    return $this->belongsToMany(Order::class);
-}
+        return $this->belongsToMany(Order::class);
+    }
 
-
+    public function warrenties(): BelongsToMany
+    {
+        return $this->belongsToMany(warrenty::class);
+    }
 }

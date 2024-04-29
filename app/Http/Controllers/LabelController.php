@@ -10,11 +10,10 @@ class LabelController extends Controller
     public function index($id = null)
     {
         if ($id) {
-           $Label = Label::where('id', $id)->first();
+           $Label = Label::with(['users','team',])->find($id);
         } else {
-            $Label = Label::
-            orderBy('id', 'desc')
-            ->paginate(1);
+            $Label = Label::with(['users','team'])->orderBy('id', 'desc')
+            ->paginate(10);
         }
         //$Label = Label::get();
         return response()->json(["Label"=> $Label]);
@@ -23,7 +22,11 @@ class LabelController extends Controller
      public function store(Request $request)
 {
     $Label = Label::create($request->toArray());
+    $Label->users()->attach($request->users_ids);
     return response()->json($Label);
+}
+public function storeteamlabel(){
+    
 }
 
  public function edit(Request $request, string $id)

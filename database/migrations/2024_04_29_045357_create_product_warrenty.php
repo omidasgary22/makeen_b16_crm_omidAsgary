@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_product', function (Blueprint $table) {
-            $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('product_id');
-            $table->unique(['order_id', 'product_id']);
+        Schema::create('product_warrenty', function (Blueprint $table) {
+            $table->foreignId('product_id')->constrained();
+            $table->foreignId('warrenty_id')->constrained();
+            $table->unique(['product_id', 'warrenty_id']);
         });
     }
 
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_product');
+        Schema::dropIfExists('product_warrenty');
     }
 };

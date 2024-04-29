@@ -10,9 +10,9 @@ class TeamController extends Controller
     public function index($id = null)
     {
         if ($id) {
-           $Team = Team::with(['user','task'])->find($id);
+           $Team = Team::with(['user','task','label'])->find($id);
         } else {
-            $Team = Team::with(['user','task'])->orderBy('id', 'desc')
+            $Team = Team::with(['user','task','label'])->orderBy('id', 'desc')
             ->paginate(10);
         }
         //$Team = Team::get();
@@ -22,6 +22,7 @@ class TeamController extends Controller
      public function store(Request $request)
 {
     $Team = Team::create($request->toArray());
+    $Team->label()->attach($request->Team_ids);
     return response()->json($Team);
 }
 

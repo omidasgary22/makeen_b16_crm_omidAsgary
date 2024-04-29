@@ -122,6 +122,7 @@ Route::group(['prefix'=> 'labels', 'as'=>'labels.'],function(){
     Route::post('store',[labelController::class,'store'])->name('store');
     Route::put('edit/{id?}', [labelController::class,'edit'])->name('edit');
     Route::delete('delete/{id?}', [labelController::class,'delete'])->name('delete');
+    //Route::post('teamlabel',[LabelController::class,'storeteamlabel'])->name('teamlabel');
 });
 
 
