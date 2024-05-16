@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -32,6 +33,7 @@ class User extends Authenticatable
         'gender',
         'Address',
         'password',
+        'image_user',
         'team_id',
     ];
 
@@ -55,6 +57,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+   protected $appends =["full_name"];
+
     // public function orders()
     // {
     //     return $this->hasMany(order::class);
@@ -65,33 +69,45 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
-    public function tasks(): HasMany
-    {
-        return $this->hasMany(Task::class);
-    }
-
-    public function factors():HasMany
-    {
-        return $this->hasMany(factor::class);
-    }
-
-    public function notes():HasMany
+    public function notes(): HasMany
     {
         return $this->hasMany(note::class);
     }
 
-    public function tikets():HasOne
+    public function tikets(): HasOne
     {
         return $this->hasOne(tiket::class);
     }
 
-    public function team():BelongsTo
+    public function team(): BelongsTo
     {
         return $this->belongsTo(team::class);
     }
 
-    public function labels():BelongsToMany
+    // public function labels(): BelongsToMany
+    // {
+    //     return $this->belongsToMany(label::class);
+    // }
+
+    public function task(): MorphMany
     {
-        return $this->belongsToMany(label::class);
+        return $this->morphMany(task::class, 'taskable');
+    }
+
+    public function labels(){
+        return $this->morphToMany(label::class,'labelabl');
+    }
+
+
+
+    // public function factors(): MorphMany
+    // {
+    //     return $this->morphMany(factor::class, 'factorable');
+    // }
+
+
+    public function getFullNameAttribute(){
+        return $this->first_name . ' '. $this->last_name;
     }
 }
+

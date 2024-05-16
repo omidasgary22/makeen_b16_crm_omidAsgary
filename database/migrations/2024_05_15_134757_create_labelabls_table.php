@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('label_team', function (Blueprint $table) {
-            $table->foreignId('label_id')->constrained();
-            $table->foreignId('team_id')->constrained();
-            $table->unique(['label_id', 'team_id']);
+        Schema::create('labelabls', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('label_id');
+            $table->foreign('label_id')->on('labels')->references('id')->onDelete('cascade');
+            $table->morphs('labelabl');
+            $table->timestamps();
         });
     }
 
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('label_team');
+        Schema::dropIfExists('labelabls');
     }
 };

@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -37,12 +39,10 @@ class Order extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class);
-
     }
 
-public function factors():HasOne
-{
-    return $this->hasOne(factor::class);
-}
-
+    public function factors(): HasMany
+    {
+        return $this->hasMany(factor::class,);
+    }
 }

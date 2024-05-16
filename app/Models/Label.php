@@ -25,4 +25,21 @@ class Label extends Model
     {
         return $this->belongsToMany(Team::class);
     }
+    public function products(): BelongsToMany
+    {
+        return $this->belongsToMany(product::class);
+    }
+    public function labels()
+    {
+        return $this->morphedByMany('App\label', 'labelabl');
+    }
+    public function user(){
+        return $this->morphedByMany(user::class,"labelabl");
+    }
+    public function teams(){
+        return $this->morphedByMany(user::class,"labelabl");
+    }
+    public function product(){
+        return $this->morphedByMany(user::class,"labelabl");
+    }
 }

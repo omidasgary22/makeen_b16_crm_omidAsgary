@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
            // $table->foreignId('user_id')->constrained()->restrictOnDelete()->restrictOnUpdate();
-            $table->string('title');
+            $table->text('title');
             $table->longText('text');
-            $table->timestamp('timestamps');
+           // $table->timestamp('timestamps');
             $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

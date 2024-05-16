@@ -15,7 +15,7 @@ class Note extends Model
     protected $fillable = [
         'title',
         'text',
-        'timestamps',
+        //'timestamps',
         'user_id',
     ];
 

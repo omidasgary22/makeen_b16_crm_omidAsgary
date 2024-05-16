@@ -25,6 +25,7 @@ class Product extends Model
         'memory',
         'price',
         'description',
+        'image_path',
 
     ];
 
@@ -37,5 +38,8 @@ class Product extends Model
     public function warrenties(): BelongsToMany
     {
         return $this->belongsToMany(warrenty::class);
+    }
+    public function labels(){
+        return $this->morphToMany(label::class,'labelabl');
     }
 }

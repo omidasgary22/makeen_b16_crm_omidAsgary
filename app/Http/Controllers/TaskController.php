@@ -10,9 +10,9 @@ class TaskController extends Controller
     public function index($id = null)
     {
         if ($id) {
-           $Task = Task::with(['user','team'])->find($id);
+           $Task = Task::with(['user','team','taskable'])->find($id);
         } else {
-            $Task = Task::with(['user','team'])->orderBy('id','desc')
+            $Task = Task::with(['user','team','taskable'])->orderBy('id','desc')
             ->paginate(1);
         }
        // $Task = Task::get();
