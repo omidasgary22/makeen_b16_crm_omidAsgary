@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderRequest\EditOrderRequest;
+use App\Http\Requests\ProductRequest\CreateProductRequest;
 use App\Models\order;
 use App\Models\product;
 use Illuminate\Database\Eloquent\HigherOrderBuilderProxy;
@@ -37,7 +39,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Support\Facades\Response
      */
-    public function store(request $request)
+    public function store(CreateProductRequest $request)
     {
         $path = $request->file('image_path')->store('public/image');
         $products = Product::create($request->merge(['image_path' => $path])->toArray());
@@ -45,7 +47,7 @@ class ProductController extends Controller
         return response()->json($products);
     }
 
-    public function edit(Request $request, string $id)
+    public function edit(EditOrderRequest $request, string $id)
     {
         $product = DB::table('products')->where('id', $id)->update($request->toArray());
         return response()->json($product);

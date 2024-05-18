@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderRequest\CreateOrderRequest;
+use App\Http\Requests\OrderRequest\EditOrderRequest;
 use App\Models\order;
 use App\Models\Product;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -22,14 +25,14 @@ class OrderController extends Controller
         return response()->json($orders);
     }
 
-    public function store(request $request)
+    public function store(CreateOrderRequest $request)
     {
         $orders = Order::create($request->toArray());
         $orders->products()->attach($request->product_ids);
         return response()->json($orders);
     }
 
-    public function edit(Request $request, string $id)
+    public function edit(EditOrderRequest $request, string $id)
     {
         $order = order::where('id', $id)->update($request->toArray());
         return response()->json($order);

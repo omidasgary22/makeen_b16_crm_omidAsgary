@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\factor;
 use App\Models\Label;
+use App\Models\media;
 use App\Models\Message;
 use App\Models\Note;
 use App\Models\Order;
@@ -14,6 +15,7 @@ use App\Models\team;
 use App\Models\Tiket;
 use App\Models\User;
 use App\Models\Warrenty;
+use Database\Factories\MediaFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -38,5 +40,6 @@ class Factoryseeder extends Seeder
         Note::factory(10)->create();
         Warrenty::factory(11)->create();
         Label::factory(10)->create();
+        media::factory(10)->create();
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\WarrentyRequest\CreateWarrentyRequest;
+use App\Http\Requests\WarrentyRequest\EditWarrentyRequest;
 use App\Models\Warrenty;
 use Illuminate\Http\Request;
 
@@ -19,13 +21,13 @@ class WarrentyController extends Controller
         return response()->json(["warrenty" => $Warrenty]);
     }
 
-    public function store(Request $request)
+    public function store(CreateWarrentyRequest $request)
     {
         $Warrenty = warrenty::create($request->toArray());
         return response()->json($Warrenty);
     }
 
-    public function edit(Request $request, string $id)
+    public function edit(EditWarrentyRequest $request, string $id)
     {
         $Warrenty = warrenty::where('id', $id)->update($request->toArray());
         return response()->json($Warrenty);

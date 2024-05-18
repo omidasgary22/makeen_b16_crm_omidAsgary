@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequests\CreateUserRequest;
+use App\Http\Requests\UserRequests\EditUserRequest;
 use App\Models\User;
 use Database\Seeders\usersTablesSeeder;
 use Illuminate\Http\Request;
@@ -45,7 +47,7 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
         $path = $request->file('image_user')->store('public/image_user');
         $users = User::create($request->merge([
@@ -62,7 +64,7 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    public function edit(Request $request, string $id)
+    public function edit(EditUserRequest  $request, string $id)
     {
         $user = User::where('id', $id)->update($request->merge([
             "password" => Hash::make($request->password)

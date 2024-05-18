@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FactorRequest\CreateFactorRequest;
+use App\Http\Requests\FactorRequest\EditFactorRequest;
 use App\Models\factor;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,13 +23,13 @@ class FactorController extends Controller
         return response()->json(["factors" => $Factors]);
     }
 
-    public function store(Request $request)
+    public function store(CreateFactorRequest $request)
     {
         $Factors = Factor::create($request->toArray());
         return response()->json($Factors);
     }
 
-    public function edit(Request $request, string $id)
+    public function edit(EditFactorRequest $request, string $id)
     {
         $Factors =Factor::where('id', $id)->update($request->toArray());
         return response()->json($Factors);

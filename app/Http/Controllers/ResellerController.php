@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ResellerRequest\CreateResellerRequest;
+use App\Http\Requests\ResellerRequest\EditResellerRequest;
 use App\Models\Reseller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,13 +23,13 @@ class ResellerController extends Controller
         return response()->json(["factor" => $Reseller]);
     }
 
-    public function store(Request $request)
+    public function store(CreateResellerRequest $request)
     {
         $Resellers = DB::table('Resellers')->create($request->toArray());
         return response()->json($Resellers);
     }
 
-    public function edit(Request $request, string $id)
+    public function edit(EditResellerRequest $request, string $id)
     {
         $Reseller = Reseller::where('id', $id)->update($request->toArray());
         return response()->json($Reseller);

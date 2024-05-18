@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskRequest\CreateTaskRequest;
+use App\Http\Requests\TaskRequest\EditTaskRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
@@ -19,13 +21,13 @@ class TaskController extends Controller
         return response()->json($Task);
     }
 
-     public function store(Request $request)
+     public function store(CreateTaskRequest $request)
 {
     $Task = Task::create($request->toArray());
     return response()->json($Task);
 }
 
- public function edit(Request $request, string $id)
+ public function edit(EditTaskRequest $request, string $id)
  {
     // dd('here');
     $Task = Task::where('id', $id)->update($request->toArray());
