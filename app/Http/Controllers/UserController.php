@@ -33,9 +33,9 @@ class UserController extends Controller
     public function index($id = null)
     {
         if ($id) {
-            $users = User::with(['tikets','order','note','labelabl'])->find($id);
+            $users = User::with(['tikets', 'order', 'note', 'labelabl'])->find($id);
         } else {
-            $users = User::with(['tikets','order','note','labelabl'])->orderBy('id', 'desc')
+            $users = User::with(['tikets', 'order', 'note', 'labelabl'])->orderBy('id', 'desc')
                 ->paginate(10);
         }
         return response()->json($users);
@@ -49,27 +49,34 @@ class UserController extends Controller
 
     public function store(CreateUserRequest $request)
     {
-        $path = $request->file('image_user')->store('public/image_user');
-        $users = User::create($request->merge([
-            "image_user" => $path,
-            "password" => Hash::make($request->password)
-        ])->toArray());
-        return response()->json($users);
-        $users->assignRole('user');
+        if ($request->user()->can('create_user')) {
+            $path = $request->file('image_user')->store('public/image_user');
+            $users = User::create($request->merge(["image_user" => $path, "password" => Hash::make($request->password)])->toArr());
+            $users->assignRole('user');
+            return response()->json($users);
+        } else {
+            return response()->json('user does not have permission');
+        }
     }
 
-    public function delete(string $id)
+    public function delete(Request $request, $id)
     {
-        $user = User::destroy($id);
-        return response()->json($user);
+        if ($request->user()->can('delete_user')) {
+            $user = User::destroy($id);
+            return response()->json($user);
+        } else {
+            return response()->json('user does not have permission');
+        }
     }
 
     public function edit(EditUserRequest  $request, string $id)
     {
-        $user = User::where('id', $id)->update($request->merge([
-            "password" => Hash::make($request->password)
-        ])->toArray());
-        return response()->json($user);
+        if ($request->user()->can('update_user')) {
+            $user = User::where('id', $id)->update($request->merge(["password" => Hash::make($request->password)])->toArray());
+            return response()->json($user);
+        } else {
+            return response()->json('user does not have permission');
+        }
     }
 
     public function users()

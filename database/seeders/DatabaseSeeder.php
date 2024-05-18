@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\Tiket;
 use Illuminate\Database\Seeder;
 use Mockery\Matcher\Not;
+use Spatie\Permission\Contracts\Permission;
 use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
@@ -20,6 +21,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([Factoryseeder::class]);
+        $this->call([PermissionSeeder::class, RoleSeeder::class,factoryseeder::class]);
+
     }
 }

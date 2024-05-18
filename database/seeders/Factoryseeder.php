@@ -27,14 +27,15 @@ class Factoryseeder extends Seeder
     public function run(): void
     {
         team::factory()->count(1)->hasUsers(10)->create();
-        user::factory()->haslabels(3)->count(1)->hasorders(10)->create();
+       $user =user::factory()->haslabels(3)->hasorders(10)->create();
+         $user->assignRole('user');
         //    Factor::factory()->count(1)->has(10)->create();
         //    Factor::factory()->count(1)->morphTo(10)->create();
         Product::factory(10)->hasAttached(Warrenty::factory(2))->hasAttached(label::factory(2))->create();
         Order::factory(10)->hasAttached(Product::factory(2))->create();
         factor::factory(10)->create();
         Reseller::factory(10)->create();
-        Task::factory(10)->count(3)->for(team::factory(),'taskable' )->create();
+        Task::factory(10)->count(3)->for(team::factory(), 'taskable')->create();
         Tiket::factory(10)->create();
         Message::factory(10)->create();
         Note::factory(10)->create();
