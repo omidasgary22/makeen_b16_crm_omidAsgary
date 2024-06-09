@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
@@ -16,17 +18,13 @@ class factor extends Model
         'Product_Code',
         'Description_of_goods',
         'Amount',
-        'user_id',
-        'order_id',
-    ];
+        'factorable_type',
+        'factorable_id',
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(user::class);
-    }
+    ];
 
     public function order():BelongsTo
     {
-        return $this->belongsTo(order::class);
+        return $this->belongsTo(Order::class);
     }
 }

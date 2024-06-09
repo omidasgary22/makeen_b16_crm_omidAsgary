@@ -26,7 +26,7 @@ class LabelController extends Controller
     return response()->json($Label);
 }
 public function storeteamlabel(){
-    
+
 }
 
  public function edit(Request $request, string $id)

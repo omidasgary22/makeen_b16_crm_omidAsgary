@@ -3,7 +3,14 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\factor;
+use App\Models\Message;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\Tiket;
 use Illuminate\Database\Seeder;
+use Mockery\Matcher\Not;
 use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +20,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(RoleSeeder::class);
+        $this->call([permissionSeedr::class, RoleSeeder::class, Factoryseeder::class]);
     }
 }

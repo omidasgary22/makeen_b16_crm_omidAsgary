@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('subject');
             $table->timestamp('expires');
             $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->on('users')->references('id')->ondelete('cascade');
             $table->timestamps();
         });
     }

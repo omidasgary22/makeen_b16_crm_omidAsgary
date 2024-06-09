@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -15,10 +16,9 @@ class Task extends Model
     protected $fillable = [
         'title',
         'description',
-        'user_id',
-        'task_id',
-        'team_id',
         'timestamps',
+        'taskable_id',
+        'taskable_type'
     ];
 
 
@@ -30,6 +30,11 @@ class Task extends Model
     public function team():BelongsTo
     {
         return $this->belongsTo(team::class);
+    }
+
+    public function taskable(): MorphTo
+    {
+        return $this->morphTo();
     }
 
 }

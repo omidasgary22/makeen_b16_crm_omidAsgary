@@ -17,8 +17,8 @@ return new class extends Migration
             $table->integer('Product_Code');
             $table->string('Description_of_goods');
             $table->string('Amount');
-           $table->unsignedBigInteger('user_id');
-           $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('order_id')->on('orders')->references('id')->onDelete('cascade');
             $table->timestamps();
         });
     }

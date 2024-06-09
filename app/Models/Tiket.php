@@ -21,18 +21,13 @@ class Tiket extends Model
         'timestamps',
     ];
 
-
     public function message(): HasMany
     {
         return $this->hasMany(Message::class);
     }
 
-    public function user():BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(user::class);
     }
-
 }
-
-
-

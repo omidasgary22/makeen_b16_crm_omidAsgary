@@ -22,6 +22,7 @@ return new class extends Migration
             $table->enum('gender',['زن','مرد']);
             $table->string('Address');
             $table->string('password');
+            $table->string('image_user');
             $table->unsignedBigInteger('team_id');
             $table->timestamps();
         });

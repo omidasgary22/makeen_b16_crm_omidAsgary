@@ -17,7 +17,7 @@ class TiketController extends Controller
             ->paginate(10);
         }
        // $Tiket = Tiket::get();
-        return response()->json(["tiket"=>$Tiket]); 
+        return response()->json(["tiket"=>$Tiket]);
     }
     public function Store(Request $request)
     {

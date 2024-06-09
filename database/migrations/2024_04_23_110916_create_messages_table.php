@@ -16,6 +16,7 @@ return new class extends Migration
             //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->longText('description');
             $table->unsignedBigInteger('tiket_id');
+            $table->foreign('tiket_id')->on('tikets')->references('id')->onDelete('cascade');
             $table->timestamps();
         });
     }

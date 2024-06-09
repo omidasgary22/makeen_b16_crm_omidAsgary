@@ -12,6 +12,7 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TiketController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarrentyController;
+use App\Jobs\NewProduct;
 use App\Models\Message;
 use App\Models\Task;
 use App\Models\Tiket;
@@ -20,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Mail\Events\MessageSent;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
+use PhpParser\Node\Expr\New_;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //salam man delam mikhad be to begam chera sal mkhobi  dishab to baqe ferdos dava bode sare
+
+Route::get('test', function () {
+    NewProduct::dispatch();
+})->name('test');
+
 Route::post('login', [UserController::class,'login'])->name('login ');
 
 

@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_warrenty', function (Blueprint $table) {
-            $table->foreignId('product_id')->constrained();
-            $table->foreignId('warrenty_id')->constrained();
+            $table->unsignedBigInteger('product_id');
+            $table->foreign("product_id")->on('products')->references('id')->onDelete('cascade');
+            $table->unsignedBigInteger('warrenty_id');
+            $table->foreign("warrenty_id")->on('warrenties')->references('id')->onDelete('cascade');
             $table->unique(['product_id', 'warrenty_id']);
         });
     }

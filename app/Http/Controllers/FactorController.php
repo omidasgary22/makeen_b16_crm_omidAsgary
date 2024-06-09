@@ -11,9 +11,9 @@ class FactorController extends Controller
     public function index($id = null)
     {
         if ($id) {
-            $Factors = Factor::with(['user','order'])->find($id);
+            $Factors = Factor::with(['order'])->find($id);
         } else {
-            $Factors = Factor::with(['user','order'])->orderBy('id', 'desc')
+            $Factors = Factor::with(['order'])->orderBy('id', 'desc')
                 ->paginate(1);
         }
         //$Factors = Factor::get();

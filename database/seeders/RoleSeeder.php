@@ -14,44 +14,21 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-
-
-
-        // User Permissions
-        Permission::create(['name' => 'create-users']);
-        Permission::create(['name' => 'update-users']);
-        Permission::create(['name' => 'delete-users']);
-        Permission::create(['name' => 'index-users']);
-
-        // product Permissions
-        Permission::create(['name' => 'create-roles']);
-        Permission::create(['name' => 'update-roles']);
-        Permission::create(['name' => 'delete-roles']);
-        Permission::create(['name' => 'index.roles']);
-
-        // Roles
-
+        $superAdmin = Role::create(['name' => 'super-admin']);
         $admin = Role::create(['name' => 'admin']);
-        $admin->givePermissionTo([
-            'create-users',
-            'update-users',
-            'delete-users',
-            'index-users'
-        ]);
-
-        $super_admin = Role::create(['name' => 'super_admin']);
-        $super_admin->givePermissionTo([
-            'create-users',
-            'update-users',
-            'delete-users',
-            'index-users',
-            'create-roles',
-            'update-roles',
-            'delete-roles',
-            'index-roles',
-        ]);
-
-        $user = Role::create(['name' => 'user']);
         $reseller = Role::create(['name' => 'reseller']);
+        $user = Role::create(['name' => 'user']);
+
+        //superAdmin
+        $superAdmin->givePermissionTo(Permission::all());
+
+        //Admin
+        $admin->givePermissionTo(['create_user', 'update_user', 'index_factor', 'update_factor', 'create_label', 'update_label', 'delete_label', 'index_label', 'index_message', 'index_note', 'create_order', 'update_order', 'index_product', 'create_reseller', 'update_reseller', 'index_reseller', 'create_task', 'update_task', 'delete_task', 'index_task', 'update_team', 'index_team', 'create_tiket', 'update_tiket', 'delete_tiket', 'index_tiket', 'create_user', 'update_user', 'delete_user', 'index_warrenty']);
+
+        //reseller
+        $reseller->givePermissionTo(['index_factor', 'index_label', 'index_message', 'index_note', 'create_order', 'update_order', 'delete_order', 'index_order', 'index_product', 'index_reseller', 'index_task', 'index_team', 'index_team', 'index_user', 'index_warrenty']);
+
+        //user
+        $user->givePermissionTo(['create_user', 'update_user', 'delete_user', 'create_order', 'update_order', 'delete_order', 'delete_order', 'create_message', 'update_message', 'delete_message']);
     }
 }

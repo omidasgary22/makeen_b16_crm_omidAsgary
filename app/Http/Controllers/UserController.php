@@ -13,26 +13,30 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-$user =  User::where('email', $request->email)->first();
-if(!$user){
-    return response()->json('user not found');
-}
+        $user =  User::where('email', $request->email)->first();
+        if (!$user) {
+            return response()->json('user not found');
+        }
 
-if(!hash::check($request->password, $user->password)){
-    return response()->json('pass error');
-
-}
-$token = $user->createToken($request->email)->plainTextToken;
-return response()->json(["Token" => $token]);
+        if (!hash::check($request->password, $user->password)) {
+            return response()->json('pass error');
+        }
+        $token = $user->createToken($request->email)->plainTextToken;
+        return response()->json(["Token" => $token]);
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id = null)
     {
-        $users = User::with(['orders','tasks','factors','notes','tikets','team','labels'])->get();
-        return response()->json($users,);
+        if ($id) {
+            $users = User::with(['tikets','order','note','labelabl'])->find($id);
+        } else {
+            $users = User::with(['tikets','order','note','labelabl'])->orderBy('id', 'desc')
+                ->paginate(10);
+        }
+        return response()->json($users);
     }
 
     public function single(string $id)
@@ -43,10 +47,13 @@ return response()->json(["Token" => $token]);
 
     public function store(Request $request)
     {
+        $path = $request->file('image_user')->store('public/image_user');
         $users = User::create($request->merge([
-            "password" => Hash::make ($request->password)
+            "image_user" => $path,
+            "password" => Hash::make($request->password)
         ])->toArray());
         return response()->json($users);
+        $users->assignRole('user');
     }
 
     public function delete(string $id)
@@ -68,5 +75,9 @@ return response()->json(["Token" => $token]);
         $user = user::find(3);
         $orders = $user->orders;
     }
-
 }
+
+
+
+//
+//'orders','factors','notes','tikets','team','labels'

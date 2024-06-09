@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+
 
 class Product extends Model
 {
@@ -25,6 +28,8 @@ class Product extends Model
         'memory',
         'price',
         'description',
+        'image',
+        //'image_path',
 
     ];
 
@@ -37,5 +42,8 @@ class Product extends Model
     public function warrenties(): BelongsToMany
     {
         return $this->belongsToMany(warrenty::class);
+    }
+    public function labels(){
+        return $this->morphToMany(label::class,'labelabl');
     }
 }
