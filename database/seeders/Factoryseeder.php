@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\factor;
+use App\Models\Factor;
 use App\Models\Label;
 use App\Models\Message;
 use App\Models\Note;
