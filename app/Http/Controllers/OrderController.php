@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\FactorMail;
 use App\Models\order;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -13,9 +16,9 @@ class OrderController extends Controller
     {
         // dd();
         if ($id) {
-            $orders = Order::with(['user', 'products', 'factors'])->find($id);
+            $orders = Order::with(['User', 'products', 'factors'])->find($id);
         } else {
-            $orders = Order::with(['user', 'products', 'factors'])->orderBy('id', 'desc')
+            $orders = Order::with(['User', 'products', 'factors'])->orderBy('id', 'desc')
                 ->paginate(5);
         }
 
@@ -24,8 +27,11 @@ class OrderController extends Controller
 
     public function store(request $request)
     {
+
         $orders = Order::create($request->toArray());
         $orders->products()->attach($request->product_ids);
+        $user = User::find($request->user_id);
+        Mail::send( new FactorMail($user));
         return response()->json($orders);
     }
 

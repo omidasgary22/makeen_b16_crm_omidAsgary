@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FactorController;
 use App\Http\Controllers\LabelController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\OrderController;
@@ -13,13 +14,16 @@ use App\Http\Controllers\TiketController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarrentyController;
 use App\Jobs\NewProduct;
+use App\Mail\FactorMail;
 use App\Models\Message;
 use App\Models\Task;
 use App\Models\Tiket;
+use App\Models\User;
 use App\Models\warrenty;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Events\MessageSent;
 use Illuminate\Routing\Route as RoutingRoute;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Expr\New_;
 
@@ -33,10 +37,9 @@ use PhpParser\Node\Expr\New_;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-//salam man delam mikhad be to begam chera sal mkhobi  dishab to baqe ferdos dava bode sare
+
 
 Route::get('test', function () {
-    NewProduct::dispatch();
 })->name('test');
 
 Route::post('login', [UserController::class,'login'])->name('login ');
@@ -130,6 +133,8 @@ Route::group(['prefix'=> 'labels', 'as'=>'labels.'],function(){
     Route::put('edit/{id?}', [labelController::class,'edit'])->name('edit');
     Route::delete('delete/{id?}', [labelController::class,'delete'])->name('delete');
     //Route::post('teamlabel',[LabelController::class,'storeteamlabel'])->name('teamlabel');
+
+
 });
 
 

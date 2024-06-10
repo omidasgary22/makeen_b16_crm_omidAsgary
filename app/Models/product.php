@@ -28,7 +28,7 @@ class Product extends Model
         'memory',
         'price',
         'description',
-        'image',
+        //'image',
         //'image_path',
 
     ];

@@ -79,7 +79,7 @@ class User extends Authenticatable
         return $this->hasOne(tiket::class);
     }
 
-    public function team(): BelongsTo
+    public function teams(): BelongsTo
     {
         return $this->belongsTo(team::class);
     }

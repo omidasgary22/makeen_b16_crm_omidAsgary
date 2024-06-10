@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\UserMail;
 use App\Models\User;
 use Database\Seeders\usersTablesSeeder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -31,9 +33,9 @@ class UserController extends Controller
     public function index($id = null)
     {
         if ($id) {
-            $users = User::with(['tikets','order','note','labelabl'])->find($id);
+            $users = User::with(['tikets','Orders','notes','labels','teams'])->find($id);
         } else {
-            $users = User::with(['tikets','order','note','labelabl'])->orderBy('id', 'desc')
+            $users = User::with(['tikets','Orders','notes','labels','teams'])->orderBy('id', 'desc')
                 ->paginate(10);
         }
         return response()->json($users);
@@ -47,13 +49,16 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $path = $request->file('image_user')->store('public/image_user');
-        $users = User::create($request->merge([
-            "image_user" => $path,
+        //$path = $request->file('image_user')->store('public/image_user');
+        $user = User::create($request->merge([
+            //"image_user" => $path,
             "password" => Hash::make($request->password)
         ])->toArray());
-        return response()->json($users);
-        $users->assignRole('user');
+        $user->assignRole('user');
+
+        Mail::send( new UserMail($user));
+        return response()->json($user);
+
     }
 
     public function delete(string $id)

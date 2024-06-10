@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ResellerMail;
 use App\Models\Reseller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class ResellerController extends Controller
 {
@@ -23,7 +26,9 @@ class ResellerController extends Controller
 
     public function store(Request $request)
     {
-        $Resellers = DB::table('Resellers')->create($request->toArray());
+        $Resellers = Reseller::create($request->toArray());
+        $user = User::find($request->user_id);
+        Mail::send( new ResellerMail($user));
         return response()->json($Resellers);
     }
 

@@ -31,7 +31,7 @@ class Order extends Model
         'user_id'
 
     ];
-    public function user(): BelongsTo
+    public function User(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

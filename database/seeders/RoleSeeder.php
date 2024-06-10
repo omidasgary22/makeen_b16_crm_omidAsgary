@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -30,5 +31,22 @@ class RoleSeeder extends Seeder
 
         //user
         $user->givePermissionTo(['create_user', 'update_user', 'delete_user', 'create_order', 'update_order', 'delete_order', 'delete_order', 'create_message', 'update_message', 'delete_message']);
+
+
+        $superAdmin = User::create([
+            'first_name' => 'امید',
+            'last_name' => 'عسگری',
+            'phone_number' => '09339244978',
+            'email' => 'omid@gmail.com',
+            'Country' => 'iran',
+            'gender' => 'مرد',
+            'Address' => 'tehran',
+            'password' => '12345',
+        ]);
+
     }
+
+
+
+
 }

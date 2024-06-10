@@ -21,9 +21,9 @@ class ProductController extends Controller
     public function index($id = null)
     {
         if ($id) {
-            $products = product::with(['warrenties','orders','labelabl'])->find($id);
+            $products = product::with(['warrenties','orders','labels'])->find($id);
         } else {
-            $products = Product::with(['warrenties','orders','labelabl'])->orderBy('id', 'desc')
+            $products = Product::with(['warrenties','orders','labels'])->orderBy('id', 'desc')
                 ->paginate(1);
         }
         //$products = DB::table('products')->get();
@@ -37,12 +37,13 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Support\Facades\Response
      */
-    public function store(request $request)
+    public function store(Request $request)
     {
-        $path = $request->file('image_path')->store('public/image');
         $products = Product::create($request->toArray());
-        $products->addMediaFormRequest('image')->toMediaCollection();
-        // $products->warrenties()->attach($request->warrenty_ids);
+        // $path = $request->file('image_path')->store('public/image');
+        // $products = Product::create($request->toArray());
+        // $products->addMediaFormRequest('image')->toMediaCollection();
+         $products->warrenties()->attach($request->warrenty_ids);
         return response()->json($products);
     }
 
