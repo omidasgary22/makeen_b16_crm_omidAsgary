@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
+<<<<<<< HEAD
             $table->timestamp('timestamps');
+=======
+            $table->timestamp('timestamps')->nullable();
+>>>>>>> 8a75532e2b5e4731f0f64291fbcca5caa6c95c25
             $table->morphs('taskable');
             $table->timestamps();
         });

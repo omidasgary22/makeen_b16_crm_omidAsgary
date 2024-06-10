@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
 use App\Mail\UserMail;
+=======
+use App\Http\Requests\UserRequests\CreateUserRequest;
+use App\Http\Requests\UserRequests\EditUserRequest;
+>>>>>>> 8a75532e2b5e4731f0f64291fbcca5caa6c95c25
 use App\Models\User;
 use Database\Seeders\usersTablesSeeder;
 use Illuminate\Http\Request;
@@ -33,9 +38,15 @@ class UserController extends Controller
     public function index($id = null)
     {
         if ($id) {
+<<<<<<< HEAD
             $users = User::with(['tikets','Orders','notes','labels','teams'])->find($id);
         } else {
             $users = User::with(['tikets','Orders','notes','labels','teams'])->orderBy('id', 'desc')
+=======
+            $users = User::with(['tikets', 'order', 'note', 'labelabl'])->find($id);
+        } else {
+            $users = User::with(['tikets', 'order', 'note', 'labelabl'])->orderBy('id', 'desc')
+>>>>>>> 8a75532e2b5e4731f0f64291fbcca5caa6c95c25
                 ->paginate(10);
         }
         return response()->json($users);
@@ -47,8 +58,9 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
+<<<<<<< HEAD
         //$path = $request->file('image_user')->store('public/image_user');
         $user = User::create($request->merge([
             //"image_user" => $path,
@@ -59,20 +71,36 @@ class UserController extends Controller
         Mail::send( new UserMail($user));
         return response()->json($user);
 
+=======
+        if ($request->user()->can('create_user')) {
+            $path = $request->file('image_user')->store('public/image_user');
+            $users = User::create($request->merge(["image_user" => $path, "password" => Hash::make($request->password)])->toArr());
+            $users->assignRole('user');
+            return response()->json($users);
+        } else {
+            return response()->json('user does not have permission');
+        }
+>>>>>>> 8a75532e2b5e4731f0f64291fbcca5caa6c95c25
     }
 
-    public function delete(string $id)
+    public function delete(Request $request, $id)
     {
-        $user = User::destroy($id);
-        return response()->json($user);
+        if ($request->user()->can('delete_user')) {
+            $user = User::destroy($id);
+            return response()->json($user);
+        } else {
+            return response()->json('user does not have permission');
+        }
     }
 
-    public function edit(Request $request, string $id)
+    public function edit(EditUserRequest  $request, string $id)
     {
-        $user = User::where('id', $id)->update($request->merge([
-            "password" => Hash::make($request->password)
-        ])->toArray());
-        return response()->json($user);
+        if ($request->user()->can('update_user')) {
+            $user = User::where('id', $id)->update($request->merge(["password" => Hash::make($request->password)])->toArray());
+            return response()->json($user);
+        } else {
+            return response()->json('user does not have permission');
+        }
     }
 
     public function users()

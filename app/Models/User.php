@@ -79,7 +79,11 @@ class User extends Authenticatable
         return $this->hasOne(tiket::class);
     }
 
+<<<<<<< HEAD
     public function teams(): BelongsTo
+=======
+    public function team(): BelongsTo
+>>>>>>> 8a75532e2b5e4731f0f64291fbcca5caa6c95c25
     {
         return $this->belongsTo(team::class);
     }

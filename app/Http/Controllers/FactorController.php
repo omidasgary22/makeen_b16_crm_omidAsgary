@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
 use App\Mail\FactorMail;
+=======
+use App\Http\Requests\FactorRequest\CreateFactorRequest;
+use App\Http\Requests\FactorRequest\EditFactorRequest;
+>>>>>>> 8a75532e2b5e4731f0f64291fbcca5caa6c95c25
 use App\Models\factor;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -23,7 +29,7 @@ class FactorController extends Controller
         return response()->json(["factors" => $Factors])();
     }
 
-    public function store(Request $request)
+    public function store(CreateFactorRequest $request)
     {
         $user = $request->user();
         $Factors = Factor::create($request->toArray());
@@ -31,7 +37,7 @@ class FactorController extends Controller
         return response()->json($Factors);
     }
 
-    public function edit(Request $request, string $id)
+    public function edit(EditFactorRequest $request, string $id)
     {
         $Factors = Factor::where('id', $id)->update($request->toArray());
         return response()->json($Factors);

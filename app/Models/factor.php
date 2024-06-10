@@ -18,7 +18,10 @@ class Factor extends Model
         'Product_Code',
         'Description_of_goods',
         'Amount',
+<<<<<<< HEAD
         'order_id',
+=======
+>>>>>>> 8a75532e2b5e4731f0f64291fbcca5caa6c95c25
         'factorable_type',
         'factorable_id',
 
