@@ -28,3 +28,4 @@ class Factor extends Model
         return $this->belongsTo(Order::class);
     }
 }
+ 

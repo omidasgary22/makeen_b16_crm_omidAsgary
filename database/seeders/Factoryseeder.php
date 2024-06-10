@@ -10,7 +10,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Reseller;
 use App\Models\Task;
-use App\Models\team;
+use App\Models\Team;
 use App\Models\Tiket;
 use App\Models\User;
 use App\Models\Warrenty;
