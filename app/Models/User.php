@@ -91,11 +91,11 @@ class User extends Authenticatable
 
     public function task(): MorphMany
     {
-        return $this->morphMany(task::class, 'taskable');
+        return $this->morphMany(Task::class, 'taskable');
     }
 
     public function labels(){
-        return $this->morphToMany(label::class,'labelabl');
+        return $this->morphToMany(Label::class,'labelabl');
     }
 
 
