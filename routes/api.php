@@ -64,6 +64,7 @@ Route::group(['prefix' => 'orders', 'as'=>'orders.'],function(){
     Route::delete('delete/{id}', [OrderController::class, 'delete'])->name('delete');
 });
 
+//test
 Route::group(['prefix' => 'factors', 'as'=>'factors.'],function(){
     Route::get('index/{id?}', [factorController::class, 'index'])->name('index');
     Route::post('store', [factorController::class, 'store'])->name('store');
