@@ -20,7 +20,7 @@ class Message extends Model
 
     public function tiket():BelongsTo
     {
-        return $this->BelongsTo(tiket::class);
+        return $this->BelongsTo(Tiket::class);
     }
 
 }

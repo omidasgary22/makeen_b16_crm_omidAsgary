@@ -28,6 +28,6 @@ class Tiket extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(user::class);
+        return $this->belongsTo(User::class);
     }
 }

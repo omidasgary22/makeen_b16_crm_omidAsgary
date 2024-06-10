@@ -41,9 +41,9 @@ class Product extends Model
 
     public function warrenties(): BelongsToMany
     {
-        return $this->belongsToMany(warrenty::class);
+        return $this->belongsToMany(Warrenty::class);
     }
     public function labels(){
-        return $this->morphToMany(label::class,'labelabl');
+        return $this->morphToMany(Label::class,'labelabl');
     }
 }

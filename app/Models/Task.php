@@ -29,12 +29,12 @@ class Task extends Model
 
     public function team():BelongsTo
     {
-        return $this->belongsTo(team::class);
+        return $this->belongsTo(Team::class);
     }
 
-    public function taskable(): MorphTo
-    {
-        return $this->morphTo();
-    }
+    // public function taskable(): MorphTo
+    // {
+    //     return $this->morphTo();
+    // }
 
 }

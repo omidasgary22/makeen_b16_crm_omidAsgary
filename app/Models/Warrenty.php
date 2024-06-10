@@ -20,6 +20,6 @@ class Warrenty extends Model
 
     public function products(): BelongsToMany
     {
-        return $this->belongsToMany(product::class);
+        return $this->belongsToMany(Product::class);
     }
 }

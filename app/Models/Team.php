@@ -27,14 +27,14 @@ class Team extends Model
 
     public function label(): BelongsToMany
     {
-        return $this->belongsToMany(label::class);
+        return $this->belongsToMany(Label::class);
     }
 
     public function tasks(): MorphMany
     {
-        return $this->morphMany(task::class, 'taskable');
+        return $this->morphMany(Task::class, 'taskable');
     }
     public function labels(){
-        return $this->morphToMany(label::class,'labelabl');
+        return $this->morphToMany(Label::class,'labelabl');
     }
 }

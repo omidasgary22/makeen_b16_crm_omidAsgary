@@ -18,7 +18,7 @@ class Label extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(user::class);
+        return $this->belongsToMany(User::class);
     }
 
     public function team(): BelongsToMany
@@ -27,19 +27,19 @@ class Label extends Model
     }
     public function products(): BelongsToMany
     {
-        return $this->belongsToMany(product::class);
+        return $this->belongsToMany(Product::class);
     }
     public function labels()
     {
         return $this->morphedByMany('App\label', 'labelabl');
     }
     public function user(){
-        return $this->morphedByMany(user::class,"labelabl");
+        return $this->morphedByMany(User::class,"labelabl");
     }
     public function teams(){
-        return $this->morphedByMany(user::class,"labelabl");
+        return $this->morphedByMany(User::class,"labelabl");
     }
     public function product(){
-        return $this->morphedByMany(user::class,"labelabl");
+        return $this->morphedByMany(User::class,"labelabl");
     }
 }

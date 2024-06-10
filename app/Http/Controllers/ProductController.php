@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\order;
-use App\Models\product;
+use App\Models\Order;
+use App\Models\Product;
 use App\Models\Product as ModelsProduct;
 use Illuminate\Database\Eloquent\HigherOrderBuilderProxy;
 use Illuminate\Http\Request;
