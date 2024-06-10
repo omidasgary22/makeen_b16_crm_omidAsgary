@@ -28,8 +28,12 @@ class Product extends Model
         'memory',
         'price',
         'description',
-        'image',
+<<<<<<< HEAD
+        //'image',
         //'image_path',
+=======
+        'image_path',
+>>>>>>> 8a75532e2b5e4731f0f64291fbcca5caa6c95c25
 
     ];
 

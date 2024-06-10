@@ -19,7 +19,11 @@ return new class extends Migration
             $table->string('graphics');
             $table->string('memory');
             $table->bigInteger('price');
+<<<<<<< HEAD
            // $table->string('image_path')->nullable();
+=======
+            $table->string('image_path')->nullable();
+>>>>>>> 8a75532e2b5e4731f0f64291fbcca5caa6c95c25
             $table->timestamps();
         });
     }

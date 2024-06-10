@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class team extends Model
+class Team extends Model
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TiketRequest\CreateTiketRequest;
+use App\Http\Requests\TiketRequest\EditTiketRequest;
 use App\Models\Tiket;
 use Illuminate\Http\Request;
 
@@ -19,12 +21,12 @@ class TiketController extends Controller
        // $Tiket = Tiket::get();
         return response()->json(["tiket"=>$Tiket]);
     }
-    public function Store(Request $request)
+    public function Store(CreateTiketRequest $request)
     {
         $Tiket = Tiket::create($request->toArray());
         return response()->json($Tiket);
     }
-    public function edit(Request $request,string $id)
+    public function edit(EditTiketRequest $request,string $id)
     {
         $Tiket = Tiket::where('id', $id)->update($request->toArray());
         return response()->json($Tiket);

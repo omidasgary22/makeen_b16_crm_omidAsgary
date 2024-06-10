@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LabelRequest\CreateLabelRequest;
+use App\Http\Requests\LabelRequest\EditLabelRequest;
 use App\Models\Label;
 use Illuminate\Http\Request;
 
@@ -19,7 +21,7 @@ class LabelController extends Controller
         return response()->json(["Label"=> $Label]);
     }
 
-     public function store(Request $request)
+     public function store(CreateLabelRequest $request)
 {
     $Label = Label::create($request->toArray());
     $Label->users()->attach($request->users_ids);
@@ -29,7 +31,7 @@ public function storeteamlabel(){
 
 }
 
- public function edit(Request $request, string $id)
+ public function edit(EditLabelRequest $request, string $id)
  {
     $Label = Label::where('id', $id)->update($request->toArray());
     return response()->json($Label);
