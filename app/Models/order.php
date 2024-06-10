@@ -43,6 +43,6 @@ class Order extends Model
 
     public function factors(): HasMany
     {
-        return $this->hasMany(factor::class,);
+        return $this->hasMany(Factor::class,);
     }
 }
