@@ -31,7 +31,7 @@ class Label extends Model
     }
     public function labels()
     {
-        return $this->morphedByMany('App\label', 'labelabl');
+        return $this->morphedByMany('App\Label', 'labelabl');
     }
     public function user(){
         return $this->morphedByMany(user::class,"labelabl");
