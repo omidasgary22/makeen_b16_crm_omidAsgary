@@ -71,17 +71,17 @@ class User extends Authenticatable
 
     public function notes(): HasMany
     {
-        return $this->hasMany(note::class);
+        return $this->hasMany(Note::class);
     }
 
     public function tikets(): HasOne
     {
-        return $this->hasOne(tiket::class);
+        return $this->hasOne(Tiket::class);
     }
 
     public function team(): BelongsTo
     {
-        return $this->belongsTo(team::class);
+        return $this->belongsTo(Team::class);
     }
 
     // public function labels(): BelongsToMany
