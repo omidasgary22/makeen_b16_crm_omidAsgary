@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class factor extends Model
+class Factor extends Model
 {
     use HasFactory, HasFactory, Notifiable, HasRoles;
     protected $fillable = [

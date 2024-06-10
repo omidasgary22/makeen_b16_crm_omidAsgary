@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\order;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,13 +31,13 @@ class OrderController extends Controller
 
     public function edit(Request $request, string $id)
     {
-        $order = order::where('id', $id)->update($request->toArray());
+        $order = Order::where('id', $id)->update($request->toArray());
         return response()->json($order);
     }
 
     public function delete($id)
     {
-        $order = order::destroy($id);
+        $order = Order::destroy($id);
         return response()->json($order);
     }
 }

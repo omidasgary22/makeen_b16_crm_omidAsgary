@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\order;
 use App\Models\product;
+use App\Models\Product as ModelsProduct;
 use Illuminate\Database\Eloquent\HigherOrderBuilderProxy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -48,7 +49,7 @@ class ProductController extends Controller
 
     public function edit(Request $request, string $id)
     {
-        $product = DB::table('products')->where('id', $id)->update($request->toArray());
+        $product = Product::where('id', $id)->update($request->toArray());
         return response()->json($product);
     }
 
@@ -61,7 +62,7 @@ class ProductController extends Controller
      */
     public function delete($id)
     {
-        $product = DB::table('products')->where('id', $id)->delete();
+        $product = product::where('id', $id)->delete();
         return response()->json($product);
     }
 }

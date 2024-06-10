@@ -24,7 +24,7 @@ class Factoryseeder extends Seeder
      */
     public function run(): void
     {
-        team::factory()->count(1)->hasUsers(10)->create();
+        Team::factory()->count(1)->hasUsers(10)->create();
         user::factory()->haslabels(3)->count(1)->hasorders(10)->create();
         //    Factor::factory()->count(1)->has(10)->create();
         //    Factor::factory()->count(1)->morphTo(10)->create();
