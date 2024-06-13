@@ -31,9 +31,9 @@ class UserController extends Controller
     public function index($id = null)
     {
         if ($id) {
-            $users = User::with(['tikets','Order','note','labelabl'])->find($id);
+            $users = User::with(['tikets','orders','note','labelabl'])->find($id);
         } else {
-            $users = User::with(['tikets','Order','note','labelabl'])->orderBy('id', 'desc')
+            $users = User::with(['tikets','orders','note','labelabl'])->orderBy('id', 'desc')
                 ->paginate(10);
         }
         return response()->json($users);

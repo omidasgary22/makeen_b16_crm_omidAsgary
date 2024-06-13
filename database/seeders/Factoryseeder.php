@@ -29,7 +29,7 @@ class Factoryseeder extends Seeder
         //    Factor::factory()->count(1)->has(10)->create();
         //    Factor::factory()->count(1)->morphTo(10)->create();
         Product::factory(10)->hasAttached(Warrenty::factory(2))->hasAttached(Label::factory(2))->create();
-       // Order::factory(10)->hasAttached(Product::factory(2))->create();
+        Order::factory(10)->hasAttached(Product::factory(2))->create();
         Factor::factory(10)->create();
         Reseller::factory(10)->create();
         // Task::factory(10)->count(3)->for(team::factory(),'taskable' )->create();
