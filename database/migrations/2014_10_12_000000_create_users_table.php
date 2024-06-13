@@ -16,7 +16,7 @@ return new class extends Migration
             // $table->foreignId('user_id')->constrained()->restrictOnDelete()->restrictOnUpdate();
             $table->string('first_name');
             $table->string('last_name');
-            $table->bigInteger('phone_number');
+            $table->string('phone_number');
             $table->string('email')->unique();
             $table->string('Country');
             $table->enum('gender',['زن','مرد']);
