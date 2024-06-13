@@ -47,7 +47,11 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $path = $request->file('image_user')->store('public/image_user');
+        if($request->file('image_user')){
+            $path = $request->file('image_user')->store('public/image_user');
+        } else{
+            $path = '-';
+        }
         $users = User::create($request->merge([
             "image_user" => $path,
             "password" => Hash::make($request->password)
