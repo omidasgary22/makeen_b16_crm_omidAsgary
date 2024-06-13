@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\team;
+use App\Models\Team;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -32,7 +32,7 @@ class UserFactory extends Factory
             'Country' => fake()->country(),
             'gender' => fake()->randomElement(['زن','مرد']),
             'Address' => fake()->words(5,true),
-            'team_id' => team::factory(),
+            'team_id' => Team::factory(),
             'password' => Hash::make('1234'),
             'image_user'=>fake()->imageUrl(640, 480, 'animals', true),
         ];
